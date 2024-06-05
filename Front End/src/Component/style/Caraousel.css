@@ -1,0 +1,80 @@
+.parent {
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1461151304267-38535e780c79?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.overImg{
+    background-color: rgba(252, 252, 252, 0.84) !important;
+    background-blend-mode: color-burn;
+    border: 1px solid antiquewhite;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 32vw;
+    top: 156px;
+    left: 16px;
+}
+
+.overImg > img{
+    width: 60px;
+}
+
+.feature{
+    position: absolute;
+    width: 80vw;
+    height: 14vh;
+    background-color: white !important;
+    background-blend-mode: color-burn;
+    border: 1px solid antiquewhite;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    top: 93vh;
+    left: 10%;
+    right: auto;
+    border-radius: 12px;
+}
+
+.featureImg{
+    width: 5vw;
+}
+
+.FeatureTypeContent{
+    padding-left: 20px;
+}
+
+.FeatureHeading{
+    font-size: 16px !important;
+}
+
+.secondary{
+    font-size: 10px !important;
+}
+
+@media (max-width: 768px) {
+    .parent {
+        height: 53vh;
+        background-size: cover; /* Adjusts the background image size to fit within the element */
+        width: 100vw !important;
+    }
+    .overImg{
+        border: 1px solid antiquewhite;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        width: 60vw;
+        top: 254px;
+        left: 25%;
+        right: 25%;
+    }
+
+    .overImg > h1{
+        font-size: 16px;
+    }
+
+    .overImg > p,button{
+        font-size: 10px;
+    }
+}

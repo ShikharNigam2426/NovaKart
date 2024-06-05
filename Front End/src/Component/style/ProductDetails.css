@@ -1,0 +1,54 @@
+.proDeatailImg{
+    width: 100%;
+    padding: 0rem 2rem;
+    height: 66vh;
+    object-fit: contain;
+}
+
+.counterButton{
+    width: 40px;
+}
+
+.imageColumn{
+    margin: 1rem 0rem;
+}
+
+.count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.proDetailHeading{
+    color: #2a2a2a;
+}
+
+.proDetailPrice{
+    color: rgb(72, 72, 72);
+}
+
+.keyFeatureList{
+    margin-left: 2rem !important;
+    color: grey;
+}
+
+.proDeatailImg {
+    transition: ease all 0.5s;
+}
+
+/* Define the prode.proDeatailImged size */
+.proDeatailImg:hover {
+    transform: scale(1.1);
+}
+
+
+
+.hoverBlue{
+    transition: ease all 0.3s;
+    border-radius: 0px;
+    border: 0px;
+}
+
+.hoverBlue:hover{
+    background-color: blue;
+}

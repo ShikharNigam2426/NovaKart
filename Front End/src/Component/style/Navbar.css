@@ -1,0 +1,44 @@
+.Navbar{
+    z-index: 100;
+}
+
+.link{
+    color: white;
+    text-decoration: none;
+}
+
+h1{
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+p{
+    margin-bottom: 0px !important;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.SearchArea{
+    border: 3px solid green;
+    border-radius: 6px 0px 0px 6px;
+}
+
+.searchIcon{
+    border-radius: 0px 6px 6px 0px !important;
+}
+
+.category{
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    width: 60vw;
+    justify-content: space-between !important;
+}   
+
+.category{
+    color: white;
+}

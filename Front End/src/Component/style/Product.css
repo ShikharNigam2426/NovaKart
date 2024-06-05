@@ -1,0 +1,27 @@
+.proSection{
+    background-color: #f6f6f69c;
+    margin: 5vw !important;
+}
+
+.card{
+    border: 0px solid !important;
+}
+
+.proImg{
+    width: 100% !important;
+    height: 219px;
+    object-fit: contain;
+}
+
+.proPrice{
+    font-size: large;
+}
+
+.proCard{
+    cursor: pointer;
+    padding: 19px;
+}
+
+.proTitle{
+    font-weight: bolder;
+}

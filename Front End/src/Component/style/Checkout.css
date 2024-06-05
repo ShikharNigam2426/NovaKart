@@ -1,0 +1,26 @@
+.check_img {
+    width: 22vmax !important;
+    height: 22vmax !important;
+    object-fit: contain;
+}
+
+.check_title {
+    font-size: 4vmin;
+}
+
+.buyButtton{
+    width: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+    .check_img {
+        width: 12vmax;
+    }
+
+    .check_title {
+        font-size: 5vmin;
+    }
+    .buyButtton{
+        width: 100%;
+    }
+}

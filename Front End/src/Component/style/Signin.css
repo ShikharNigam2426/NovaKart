@@ -1,0 +1,63 @@
+/* Signin.css */
+
+/* Styles for the form container */
+.signUpPage {
+    height: 100vh; /* Make the form cover the entire viewport */
+    background-color: #f0f0f0; /* Light background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for the signin box */
+.SignInBox {
+    background-color: #fff; /* White background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+    max-width: 400px; /* Limit width */
+    width: 90%; /* Responsive width */
+}
+
+/* Styles for the heading */
+.heading {
+    text-align: center;
+    color: #333; /* Dark text color */
+}
+
+/* Styles for labels */
+.Label {
+    margin-top: 10px;
+    color: #555; /* Medium-dark text color */
+}
+
+/* Styles for input fields */
+.inputField {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Styles for the signup link */
+.signupLink {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.signupLink a {
+    color: #007bff; /* Blue link color */
+    text-decoration: none;
+}
+
+.signupLink a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Styles for the signup button */
+.signUpButton {
+    width: 100%;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
