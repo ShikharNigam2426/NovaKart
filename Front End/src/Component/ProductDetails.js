@@ -1,26 +1,46 @@
-import React from 'react'
-import products from './DataArray/ProductArray'
-import './style/ProductDetails.css'
-import { id } from './Product'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import products from './DataArray/ProductArray';
+import './style/ProductDetails.css';
+import { increaseAmount } from '../features/checkOut/checkOutSlice';
 
 const ProductDetails = () => {
-    const [index, setIndex] = React.useState(id);
-    const [ItemCount, setItemCount] = React.useState(0);
+    const { id } = useParams();
+    const logginSelector = useSelector((state) => state.logger.value);
+    const dispatch = useDispatch();
+    const [ItemCount, setItemCount] = useState(1);
 
-    let product = products[index - 1];
-    let keyFeatures = product.key_features;
-    let category = product.pro_category;
+    const productIndex = parseInt(id) - 1;
+    const product = products[productIndex];
 
-    const Update = (Event) => {
-        const operator = Event.target.innerText;
-        operator === '+' ? (setItemCount(ItemCount + 1)) : (ItemCount === 0 ? setItemCount(0) : setItemCount(ItemCount - 1));
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top when the component mounts
+    }, [id]);
+
+    const Update = (event) => {
+        const operator = event.target.innerText;
+        operator === '+' ? setItemCount(ItemCount + 1) : setItemCount(ItemCount > 1 ? ItemCount - 1 : 1);
     }
 
+    const addToHandler = async (product) => {
+        const userId = logginSelector;
+        const proDesc = product.pro_desc;
+        try {
+            const response = await axios.post('http://localhost:2000/user/cart/add', { proDesc, userId });
+            console.log('Item Added to Cart');
+            console.log(response);
+            
+            // increasing the value of the checkout amount when a product is added to the cart
+            dispatch(increaseAmount(product.pro_price));
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
-    const showProductDetails = (product) => {
-        setIndex(product.pro_id);
-        console.log(`Click On ${product.pro_id}`);
+    if (!product) {
+        return <div>Product not found</div>;
     }
 
     let rating = [];
@@ -28,70 +48,49 @@ const ProductDetails = () => {
         rating.push('⭐');
     }
 
-    const addToHandler = (product) => {
-        const addItem = {
-            img: product.pro_image,
-            desc: product.pro_desc,
-            price: product.pro_price,
-            category: product.pro_category,
-            rating: product.pro_rating
-        }
-    }
     return (
         <div className="container ubuntu-regular mt-4">
             <div className="row">
                 <div className="imageColumn col-6">
                     <img className='proDeatailImg' src={product.pro_image} alt="" />
-                </div>  
+                </div>
                 <div className="col-6 mt-5">
                     <h2 className='proDetailHeading'>{product.pro_desc}</h2>
                     <h3 className='proDetailPrice'>${product.pro_price}</h3>
-                    <div className="keyFeature">
-                        <h5 className=''>Key Feature</h5>
-                        <ul className='keyFeatureList mt-3'>
-                            {
-                                keyFeatures.map((feature) => {
-                                    return <li>{feature}</li>
-                                })
-                            }
-                        </ul>
-                    </div>
                     <div className="d-flex align-items-center">
-                        <div className="counterButton btn btn-danger px-2" onClick={(Event) => Update(Event)}>-</div>
+                        <div className="counterButton btn btn-danger px-2" onClick={(event) => Update(event)}>-</div>
                         <div className="count counterButton px-2">{ItemCount}</div>
-                        <div className="counterButton btn btn-primary px-2" onClick={(Event) => Update(Event)}>+</div>
-                        <button className="btn btn-dark mx-4 hoverBlue" onClick={() => {addToHandler(product)}}>Add to Cart</button>
+                        <div className="counterButton btn btn-primary px-2" onClick={(event) => Update(event)}>+</div>
+                        <button className="btn btn-dark mx-4 hoverBlue" onClick={() => { addToHandler(product) }}>Add to Cart</button>
                     </div>
                     <hr />
                     <p>Category: {product.pro_category}</p>
                 </div>
             </div>
             <div className="row">
-                <h1 className='RelProHeading mt-4'>Related Product</h1>
-
+                <h1 className='RelProHeading mt-4'>Related Products</h1>
                 {products.map((item) => {
                     let link = item.pro_image;
-                    if (item.pro_category === category && item.pro_id !== index) {
+                    if (item.pro_category === product.pro_category && item.pro_id !== product.pro_id) {
                         return (
-                            <div className="proCard col-3 card ubuntu-regular" onClick={() => showProductDetails(item)}>
-                                <Link className='black' to='/productdetails'>
-                                    <img className='proImg card-img-top' src={link} alt="" />
+                            <div key={item.pro_id} className="proCard col-3 card ubuntu-regular">
+                                <Link className='black' to={`/productdetails/${item.pro_id}`}>
+                                    <img className='proImg  card-img-top' src={link} alt="" />
                                     <div className="card-body">
                                         <p className='proTitle my-2 card-title'>{item.pro_name}</p>
                                         <p className='proDesc card-text mb-2'>{item.pro_desc}</p>
-                                        {rating}
+                                        {rating.map((star, index) => <span key={index}>{star}</span>)}
                                         <div className="proPrice card-text my-2">${item.pro_price}</div>
                                     </div>
                                 </Link>
                             </div>
                         )
                     }
-                    return <></>;
-                })
-                }
+                    return null;
+                })}
             </div>
         </div>
-    )
+    );
 }
 
-export default ProductDetails
+export default ProductDetails;

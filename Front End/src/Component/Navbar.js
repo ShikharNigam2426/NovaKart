@@ -1,13 +1,25 @@
 import React from 'react';
-import './style/Navbar.css'
-import './style/Fonts.css'
+import './style/Navbar.css';
+import './style/Fonts.css';
 import { IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { LogOut } from '../features/usersLogin/userLoginSlice'; // Import your LogOut action
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Navbar = () => {
-  const [items, setItems] = React.useState(0);
+  const loginSelector = useSelector((state) => state.logger.value); // Adjust this based on your actual state structure
+  const dispatch = useDispatch();
+
+  console.log(loginSelector); // Check the login state in the console
+
+  const handleLogout = () => {
+    dispatch(LogOut());
+    redirect('/');
+  };
+
   return (
     <div className='Navbar d-flex flex-column justify-content-between bg-primary pb-3'>
       <div className="top py-2">
@@ -33,7 +45,7 @@ const Navbar = () => {
           <p>Gift Cards</p>
         </div>
 
-        <div className="loginButton d-flex align-items-center">
+        <div className="loginButton d-flex flex-row align-items-center">
           <div className="CartIcon px-3">
             <Link to='/checkout'>
               <IconButton component="a" href="">
@@ -41,9 +53,18 @@ const Navbar = () => {
               </IconButton>
             </Link>
           </div>
-          <Link to='/signup'>
-            <button className='btn btn-success'>Sign Up</button>
-          </Link>
+
+          {(loginSelector !== -1) ? (
+            <>
+              <AccountCircleIcon />
+              <button className='btn btn-danger mx-2' onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <Link to='/signup'>
+              <button className='btn btn-success'>Sign Up</button>
+            </Link>
+          )}
+
         </div>
       </div>
     </div>

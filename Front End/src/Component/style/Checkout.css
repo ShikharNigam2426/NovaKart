@@ -12,6 +12,10 @@
     width: 50%;
 }
 
+.widthRow{
+    width: 87% !important;
+}
+
 @media only screen and (max-width: 768px) {
     .check_img {
         width: 12vmax;
