@@ -19,10 +19,6 @@ const db = new pg.Client({
 
 db.connect();
 
-app.get('/', (req, res) => {
-  res.send('<h1>this is a heading</h1>');
-});
-
 app.post('/user/signup', async (req, res) => {
   const { fullName, password } = req.body;
   try {
@@ -108,6 +104,19 @@ app.delete('/user/cartitem/delete', async (req, res) => {
   } catch (error) {
     console.error('Error removing item from cart:', error);
     res.status(500).json({ error: 'An error occurred while removing the item from the cart' });
+  }
+});
+
+
+// This req is used to get the cehckout price of the user - Payment.js 25
+app.get('/getcheckoutprice', async (req, res) => {
+  const { userId } = req.query;
+  try {
+    const result = await db.query('SELECT pro_price FROM cart WHERE user_id = $1', [userId]);
+    res.status(200).send(result.rows); 
+  } catch (error) {
+    console.error('Error executing query:', error);
+    res.status(500).send('Error retrieving checkout price'); // Handle errors appropriately
   }
 });
 

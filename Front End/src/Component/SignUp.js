@@ -28,7 +28,6 @@ const SignUp = () => {
         fullName,
         password
       });
-      console.log('User created:', response.data);
       alert('User created successfully. Redirecting to login page.');
       navigate('/signin'); // Redirect to login page
     } catch (error) {

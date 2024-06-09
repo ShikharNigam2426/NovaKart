@@ -22,7 +22,7 @@ const SignIn = () => {
         try {
             const response = await axios.post('http://localhost:2000/user/login', { loginName, password });
             if (response.status !== 200) {
-                throw new Error('User Does not Exist or password may be Wrong');
+                throw new Error('password may be Wrong');
             }
             dispatch(Login(response.data[0].id));
             navigate('/');
@@ -31,7 +31,6 @@ const SignIn = () => {
             navigate('/signup');
         }
     }
-    // console.log(loginSelector);
     return (
         <div>
             <form onSubmit={(e) => { handleSubmit(e) }} className='signUpPage d-flex flex-column justify-content-center align-items-center'>
