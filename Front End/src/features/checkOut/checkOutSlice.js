@@ -4,6 +4,8 @@ const initialState = {
     value: 0,
 }
 
+// this state is made for storing the total amount of the cart prodtucts.
+
 export const checkOutSlice = createSlice({
     name: 'checkOutSlice',
     initialState,

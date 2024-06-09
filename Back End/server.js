@@ -49,16 +49,19 @@ app.post('/user/login', async (req, res) => {
   }
 })
 
+// This is used to ADD item to the cart table
+
 app.post('/user/cart/add', async (req, res) => {
-  const { proDesc, userId } = req.body;
+  const { proDesc, userId, ItemCount } = req.body;
   try {
-    let result = await db.query('select pro_id from products where pro_desc = $1', [proDesc]);
+    let result = await db.query('select pro_id, pro_price from products where pro_desc = $1', [proDesc]);
     if (result.rowCount === 0) {
       throw new Error('Data not Found')
     }
     else {
       const proId = result.rows[0].pro_id;
-      let PushResult = await db.query('insert into cart(pro_id, user_id) values($1, $2)', [proId, userId]);
+      const price = result.rows[0].pro_price * ItemCount;
+      let PushResult = await db.query('insert into cart(pro_id, user_id, pro_qty, pro_price) values($1, $2, $3, $4)', [proId, userId, ItemCount, price]);
       if (result.rowCount === 0) {
         throw new Error('Data not Pushed to db');
       }
@@ -70,11 +73,12 @@ app.post('/user/cart/add', async (req, res) => {
   }
 })
 
-// THIS IS GET REQ FOR FETCHING THE DATA FROM THE CART TABLE 
+// THIS IS GET REQ FOR FETCHING THE DATA FROM THE CART TABLE - checkout.js 21
+
 app.get('/user/cartitem', async (req, res) => {
   const { userId } = req.query; // Use query parameters instead of body
   try {
-    const result = await db.query('select pro_id from cart where user_id = $1', [userId]);
+    const result = await db.query('select pro_id, pro_qty from cart where user_id = $1', [userId]);
     res.status(200).send(result.rows);
   } catch (error) {
     console.log(error);
@@ -82,8 +86,11 @@ app.get('/user/cartitem', async (req, res) => {
   }
 })
 
+// this is used to DELETE item, from the cart
+
 app.delete('/user/cartitem/delete', async (req, res) => {
-  const { userId, itemId } = req.body;
+  const { userId, itemId } = req.query; // Changed from req.body to req.query
+  console.log(req.query);
 
   if (!userId || !itemId) {
     return res.status(400).json({ error: 'userId and itemId are required' });
@@ -103,6 +110,7 @@ app.delete('/user/cartitem/delete', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while removing the item from the cart' });
   }
 });
+
 
 
 app.listen(port, () => {

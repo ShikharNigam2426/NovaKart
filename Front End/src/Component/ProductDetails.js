@@ -24,11 +24,11 @@ const ProductDetails = () => {
         operator === '+' ? setItemCount(ItemCount + 1) : setItemCount(ItemCount > 1 ? ItemCount - 1 : 1);
     }
 
-    const addToHandler = async (product) => {
+    const addToCart = async (product) => {
         const userId = logginSelector;
         const proDesc = product.pro_desc;
         try {
-            const response = await axios.post('http://localhost:2000/user/cart/add', { proDesc, userId });
+            const response = await axios.post('http://localhost:2000/user/cart/add', { proDesc, userId, ItemCount });
             console.log('Item Added to Cart');
             console.log(response);
             
@@ -61,7 +61,7 @@ const ProductDetails = () => {
                         <div className="counterButton btn btn-danger px-2" onClick={(event) => Update(event)}>-</div>
                         <div className="count counterButton px-2">{ItemCount}</div>
                         <div className="counterButton btn btn-primary px-2" onClick={(event) => Update(event)}>+</div>
-                        <button className="btn btn-dark mx-4 hoverBlue" onClick={() => { addToHandler(product) }}>Add to Cart</button>
+                        <button className="btn btn-dark mx-4 hoverBlue" onClick={() => { addToCart(product) }}>Add to Cart</button>
                     </div>
                     <hr />
                     <p>Category: {product.pro_category}</p>

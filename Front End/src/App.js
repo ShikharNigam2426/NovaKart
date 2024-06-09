@@ -7,6 +7,7 @@ import SignUp from './Component/SignUp.js';
 import SignIn from './Component/Signin.js';
 import ProductDetails from './Component/ProductDetails.js';
 import Checkout from './Component/Checkout.js';
+import Payment from './Component/Payment.js';
 
 const App = () => {
   return (
@@ -47,6 +48,12 @@ const App = () => {
             <div>
               <Navbar />
               <ProductDetails />
+            </div>
+          } />
+          <Route path='checkout/cart/checkoutpayemnt'
+          element={
+            <div>
+              <Payment />
             </div>
           } />
          </Routes>

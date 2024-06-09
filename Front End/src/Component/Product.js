@@ -3,9 +3,12 @@ import './style/Product.css'
 import products from './DataArray/ProductArray'
 import './style/All.css'
 import { Link } from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 
 let id;
 const Product = () => {
+  AOS.init();
 
   // YE FUNCTION BTA RHA HAI KI KAUN SE OBJECT PE CLICK KIYA HAI USKE INDEX + 1 KI VALUE KO PRINT KR RHA HAI 
   const showProductDetails = (product) => {
@@ -28,7 +31,7 @@ const Product = () => {
               rating.push('⭐');
             }
             return (
-              <div className="proCard col-3 card ubuntu-regular" onClick={() => showProductDetails(product)}>
+              <div data-aos="flip-left" className="proCard col-3 card ubuntu-regular" onClick={() => showProductDetails(product)}>
                 <Link className='black' to= {`/productdetails/${product.pro_id}`}>
                   <img className='proImg card-img-top' src={link} alt="" />
                   <div className="card-body">

@@ -13,7 +13,7 @@ const Navbar = () => {
   const loginSelector = useSelector((state) => state.logger.value); // Adjust this based on your actual state structure
   const dispatch = useDispatch();
 
-  console.log(loginSelector); // Check the login state in the console
+  // console.log(loginSelector);  Check the login state in the console
 
   const handleLogout = () => {
     dispatch(LogOut());

@@ -1,0 +1,19 @@
+.checkoutPage{
+    background-color: #f6f6f69c;
+}
+
+.addressInput{
+    width: 50%;
+    background: white;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+.border{
+    border-bottom: 1px solid black;
+}
+
+.checkbox{
+    width: 16px;
+}
