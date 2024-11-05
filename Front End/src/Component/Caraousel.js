@@ -17,7 +17,8 @@ const Carousel = () => {
                 <p className='pb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, maiores.</p>
                 <b><a href="/">Shop Now</a></b>
             </div>
-            <div className="feature d-flex align-items-center justify-content-around">
+            {/* Feature Bar Section*/}
+            <div className="feature d-flex align-items-center justify-content-around overflow-hidden">
                 <div className="freeShipping featureContent d-flex px-5 align-items-center">
                     <img className='featureImg' src="./images/truck.png" alt="" data-aos="fade-right"/>
                     <div className="d-flex flex-column FeatureTypeContent">

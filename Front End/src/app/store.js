@@ -5,6 +5,6 @@ import checkOutSlice from '../features/checkOut/checkOutSlice'
 export const store = configureStore({
   reducer: {
     logger: userLoginSlice,
-    checkout: checkOutSlice, // This should match the key you want in your state
+    checkout: checkOutSlice, 
   },
 })

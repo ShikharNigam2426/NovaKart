@@ -21,7 +21,7 @@ const ProductDetails = () => {
 
     const Update = (event) => {
         const operator = event.target.innerText;
-        operator === '+' ? setItemCount(ItemCount + 1) : setItemCount(ItemCount > 1 ? ItemCount - 1 : 1);
+        operator === '+' ? setItemCount(ItemCount + 1) : setItemCount(ItemCount > 1 ? ItemCount - 1 : 1); //we cant add 0 product to the cart
     }
 
     const addToCart = async (product) => {

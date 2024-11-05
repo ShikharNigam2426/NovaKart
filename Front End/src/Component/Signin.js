@@ -27,7 +27,7 @@ const SignIn = () => {
             dispatch(Login(response.data[0].id));
             navigate('/');
         } catch (error) {
-            alert('User does not exist, First Create a user')
+            alert('User does not exist, Create a account')
             navigate('/signup');
         }
     }
